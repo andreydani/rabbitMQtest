@@ -3,9 +3,11 @@ Simple test of RabbitMQ in Python
 
 This is simple messaging test for RabbitMQ.
 
+## consumer.py
+This script waits for messages.
 
-consumer.py waits for messages
-producer.py sends one message and leaves.
+## producer.py 
+This script sends one message and leaves.
 
 Requirements:
 
