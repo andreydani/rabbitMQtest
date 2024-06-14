@@ -15,7 +15,7 @@ Requirements:
 * Erlang/OTP
 * RabbitMQ
 
-Expected results on consumer.py
+# Expected results on consumer.py
 ~~~
 python.exe C:\projetos\rabbitMQtest\consumer.py 
  [*] Waiting for messages. To exit press CTRL+C
@@ -23,4 +23,9 @@ python.exe C:\projetos\rabbitMQtest\consumer.py
  [x] Received b'Hello World!'
  [x] Received b'Hello World!'
  [x] Received b'Hello World!'
+~~~
+# Expected results on producer.py
+~~~
+python.exe C:\projetos\geolocation\producer.py 
+ [x] Sent 'Hello World!'
 ~~~
