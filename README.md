@@ -1,5 +1,6 @@
 # rabbitMQtest
-Simple test of RabbitMQ in Python
+Test of RabbitMQ in Python, using docker container for execution of RabbitMQ, consumer.py and producer.py.
+The files are bundled together using docker-compose
 
 This is simple messaging test for RabbitMQ.
 
@@ -14,6 +15,7 @@ Requirements:
 * Python
 * Erlang/OTP
 * RabbitMQ
+* Docker
 
 ## Expected results on consumer.py
 ~~~
