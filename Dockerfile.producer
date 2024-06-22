@@ -1,0 +1,8 @@
+FROM python:3.9-slim
+
+RUN pip install pika
+
+COPY producer.py /app/producer.py
+WORKDIR /app
+
+CMD ["python", "producer.py"]

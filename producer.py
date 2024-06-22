@@ -1,18 +1,31 @@
 import pika
+import time
 
-# Conectar ao servidor RabbitMQ
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-channel = connection.channel()
+def main():
+    # Tentativa de conexão com o RabbitMQ
+    connected = False
+    while not connected:
+        try:
+            connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+            connected = True
+        except pika.exceptions.AMQPConnectionError:
+            print("Aguardando RabbitMQ...")
+            time.sleep(5)
 
-# Declarar uma fila chamada 'hello'
-channel.queue_declare(queue='hello')
+    channel = connection.channel()
 
-# Enviar uma mensagem para a fila 'hello'
-channel.basic_publish(exchange='',
-                      routing_key='hello',
-                      body='Hello World!')
+    # Declarar uma fila chamada 'hello'
+    channel.queue_declare(queue='hello')
 
-print(" [x] Sent 'Hello World!'")
+    # Enviar uma mensagem para a fila 'hello'
+    channel.basic_publish(exchange='',
+                          routing_key='hello',
+                          body='Hello World!')
 
-# Fechar a conexão
-connection.close()
+    print(" [x] Sent 'Hello World!'")
+
+    # Fechar a conexão
+    connection.close()
+
+if __name__ == "__main__":
+    main()
