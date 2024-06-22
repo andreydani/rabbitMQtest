@@ -1,8 +1,10 @@
 import pika
 import time
 
+
 def main():
     # Tentativa de conexão com o RabbitMQ
+    global connection, channel
     connected = False
     while not connected:
         try:
@@ -23,17 +25,21 @@ def main():
     # Função de callback para processar mensagens
     def callback(ch, method, properties, body):
         print(f" [x] Received {body}")
+        ch.basic_cancel(consumer_tag='my_consumer')
+        connection.close()
 
     # Consumir mensagens da fila 'hello'
     try:
         channel.basic_consume(queue='hello',
-                          on_message_callback=callback,
-                          auto_ack=True)
+                              on_message_callback=callback,
+                              auto_ack=True,
+                              consumer_tag='my_consumer')
     except Exception as e:
         print('Failed to consume ' + str(e))
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
+
 
 if __name__ == "__main__":
     main()
